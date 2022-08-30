@@ -54,17 +54,17 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     alert("All fields are required!");
    } else if (validateInput(pilot) !== "Not a Number" || validateInput(copilot) !== "Not a Number" || validateInput(fuelLevel) !== "Is a Number" || validateInput(cargoLevel) !== "Is a Number") {
     alert("Make sure to enter valid Information for each field!");
-   } else if ((fuelLevel) < 10000) {
+   } else if (fuelLevel < 10000) {
     faultyItems.style.visibility = "visible";
     fuelStatus.innerHTML = `Fuel level is too low for launch`;
     launchStatus.innerHTML = `Shuttle not ready for launch`;
     launchStatus.style.color = "red";
-   } else if ((cargoLevel) > 10000) {
+   } else if (cargoLevel > 10000) {
     faultyItems.style.visibility = "visible";
     cargoStatus.innerHTML = 'Cargo weight is too high for launch';
     launchStatus.innerHTML = `Shuttle not ready for launch`;
     launchStatus.style.color = "red";
-    console.log("wtf?");
+    console.log("Try that again, buddy.");
    } else {
     launchStatus.innerHTML = `Shuttle is ready for launch`;
     launchStatus.style.color = "green";
