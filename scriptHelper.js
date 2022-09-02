@@ -50,26 +50,39 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    let faultyItems = document.getElementById("faultyItems");
    let launchStatus = document.getElementById("launchStatus");
    
-   if (pilot === "" || copilot === "" || fuelLevel === "" || cargoLevel === "" ) {
-    alert("All fields are required!");
-   } else if (validateInput(pilot) !== "Not a Number" || validateInput(copilot) !== "Not a Number" || validateInput(fuelLevel) !== "Is a Number" || validateInput(cargoLevel) !== "Is a Number") {
-    alert("Make sure to enter valid Information for each field!");
+   //Check using validateInput and alert the user approporately for each.
+    if (validateInput(pilot) !== "Not a Number" || validateInput(copilot) !== "Not a Number" || validateInput(fuelLevel) !== "Is a Number" || validateInput(cargoLevel) !== "Is a Number") {
+        if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
+            alert ("All fields are required!");
+        } else {
+            alert("Make sure to enter valid Information for each field!");
+        }
+
+    //Check level for fuel.
    } else if (fuelLevel < 10000) {
     faultyItems.style.visibility = "visible";
     fuelStatus.innerHTML = `Fuel level is too low for launch`;
     launchStatus.innerHTML = `Shuttle not ready for launch`;
     launchStatus.style.color = "red";
+
+    //Check weight limit of cargo.
    } else if (cargoLevel > 10000) {
     faultyItems.style.visibility = "visible";
     cargoStatus.innerHTML = 'Cargo weight is too high for launch';
     launchStatus.innerHTML = `Shuttle not ready for launch`;
     launchStatus.style.color = "red";
     console.log("Try that again, buddy.");
+
+
    } else {
     launchStatus.innerHTML = `Shuttle is ready for launch`;
     launchStatus.style.color = "green";
+    faultyItems.style.visibility = "hidden";
+    fuelStatus.innerHTML = `Fuel level high enough for launch`;
+    cargoStatus.innerHTML = 'Cargo mass low enough for launch';
    }
 
+   // Set names to pilotStatus and copilotStatus.
    pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
    copilotStatus.innerHTML = `Copilot ${copilot} is ready for launch`;
 }
